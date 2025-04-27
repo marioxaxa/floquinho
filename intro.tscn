@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bag2n6odm8e34"]
+[gd_scene load_steps=5 format=3 uid="uid://bag2n6odm8e34"]
 
+[ext_resource type="Texture2D" uid="uid://bfkjctt1v58d7" path="res://assets/Sprite-0003.png" id="1_ayt76"]
 [ext_resource type="AudioStream" uid="uid://bila0cvqstya2" path="res://Menuloop.wav" id="1_s2ta7"]
-[ext_resource type="Texture2D" path="res://Sprite-0003.png" id="2_ayt76"]
+[ext_resource type="Script" uid="uid://dw2n82mjdfsts" path="res://audio_stream_player_2d.gd" id="3_7a8ye"]
 
 [sub_resource type="GDScript" id="GDScript_g4887"]
 script/source = "extends RichTextLabel
@@ -35,17 +36,19 @@ color = Color(0, 0, 0, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 texture_filter = 1
-position = Vector2(-293, 0)
+position = Vector2(-335, 7)
 amount = 20
-texture = ExtResource("2_ayt76")
+texture = ExtResource("1_ayt76")
 lifetime = 8.0
 speed_scale = 0.25
 randomness = 0.11
 emission_shape = 1
-emission_sphere_radius = 60.47
+emission_sphere_radius = 105.72
 spread = 125.0
 gravity = Vector2(30, -5.001)
 initial_velocity_max = 30.3
+angular_velocity_min = -342.85
+angular_velocity_max = 205.71
 linear_accel_min = -7.93
 scale_amount_min = 0.1
 scale_amount_max = 0.6
@@ -73,4 +76,6 @@ script = SubResource("GDScript_g4887")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_s2ta7")
+volume_db = 9.0
 autoplay = true
+script = ExtResource("3_7a8ye")

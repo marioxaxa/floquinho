@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://v0xkl8mdy0ip"]
 
-[ext_resource type="Texture2D" uid="uid://cq3n6l621tuv6" path="res://assets/Sprite-00002.png" id="1_4vge2"]
+[ext_resource type="Texture2D" uid="uid://m2wf8a2a4gro" path="res://assets/Sprite-00021.png" id="1_rnjyy"]
 [ext_resource type="PackedScene" uid="uid://c8ic7m41tyn4j" path="res://scenes/personagem.tscn" id="2_rnjyy"]
 [ext_resource type="PackedScene" uid="uid://qs4vtrm4ytsx" path="res://scenes/spawn_line.tscn" id="4_fws66"]
 
@@ -27,7 +27,7 @@ size = Vector2(348, 354)
 [node name="Sprite-00002" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(250, 149)
-texture = ExtResource("1_4vge2")
+texture = ExtResource("1_rnjyy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -68,6 +68,8 @@ shape = SubResource("RectangleShape2D_epypp")
 
 [node name="Personagem" parent="." instance=ExtResource("2_rnjyy")]
 position = Vector2(169, 128)
+lock_rotation = false
+angular_velocity = 1.74533
 
 [node name="SpawnLine" parent="." instance=ExtResource("4_fws66")]
 fireball_base = 1
