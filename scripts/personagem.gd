@@ -8,8 +8,10 @@ extends RigidBody2D
 # -- Referências a nós filhos --
 @onready var line: Line2D = $Line2D  # Certifique-se de ter adicionado um Line2D como filho
 
+signal died                      # broadcast so GameManager / UI can react
 
-
+@export var invulnerable_time := 0.0   # seconds of i-frames (0 = none)
+var hit_on_cooldown := false
 
 # -- Estado interno --
 var start_pos: Vector2 = Vector2.ZERO
@@ -60,3 +62,13 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var vel = state.linear_velocity
 	if vel.length() > max_speed:
 		state.linear_velocity = vel.normalized() * max_speed
+		
+func die() -> void:
+	hit_on_cooldown = true
+	died.emit()                       # inform whoever cares
+	$CollisionShape2D.disabled = true # disable further hits
+
+	# Example: restart the level after 1 s
+	get_tree().create_timer(3.0).timeout.connect(
+		func (): get_tree().reload_current_scene()
+	)

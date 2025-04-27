@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Testandp"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://scenes/node_2d.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [display]
 
@@ -22,3 +22,8 @@ window/size/viewport_height=900
 window/stretch/mode="canvas_items"
 window/stretch/scale=3.0
 window/stretch/scale_mode="integer"
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="attacks"

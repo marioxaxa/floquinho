@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://v0xkl8mdy0ip"]
+[gd_scene load_steps=10 format=3 uid="uid://v0xkl8mdy0ip"]
 
-[ext_resource type="Script" uid="uid://cibcpahujuvar" path="res://personagem.gd" id="1_0e48y"]
-[ext_resource type="Texture2D" uid="uid://cq3n6l621tuv6" path="res://Sprite-00002.png" id="1_epypp"]
-[ext_resource type="Texture2D" uid="uid://bfkjctt1v58d7" path="res://Sprite-0003.png" id="2_epypp"]
-[ext_resource type="PackedScene" uid="uid://qs4vtrm4ytsx" path="res://spawn_line.tscn" id="3_epypp"]
+[ext_resource type="Texture2D" uid="uid://cq3n6l621tuv6" path="res://assets/Sprite-00002.png" id="1_4vge2"]
+[ext_resource type="PackedScene" uid="uid://c8ic7m41tyn4j" path="res://scenes/personagem.tscn" id="2_rnjyy"]
+[ext_resource type="PackedScene" uid="uid://qs4vtrm4ytsx" path="res://scenes/spawn_line.tscn" id="4_fws66"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0hol4"]
 b = Vector2(0, 300)
@@ -23,35 +22,12 @@ size = Vector2(664, 191.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
 size = Vector2(348, 354)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rj586"]
-friction = 0.0
-bounce = 1.0
-
-[sub_resource type="GDScript" id="GDScript_epypp"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d7sh"]
-size = Vector2(24, 24)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_epypp"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 19.5
-angular_velocity_min = -264.83
-angular_velocity_max = 41.38
-radial_velocity_min = -160.92
-radial_velocity_max = 80.46
-gravity = Vector3(0, 0, 0)
-color = Color(0.09, 0.696666, 1, 1)
-hue_variation_min = -0.1
-hue_variation_max = 0.04
-anim_speed_max = 5.15
-
 [node name="Fase teste" type="Node2D"]
 
 [node name="Sprite-00002" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(250, 149)
-texture = ExtResource("1_epypp")
+texture = ExtResource("1_4vge2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -90,33 +66,11 @@ shape = SubResource("RectangleShape2D_epypp")
 position = Vector2(644, 148)
 shape = SubResource("RectangleShape2D_epypp")
 
-[node name="Personagem" type="RigidBody2D" parent="."]
+[node name="Personagem" parent="." instance=ExtResource("2_rnjyy")]
 position = Vector2(169, 128)
-physics_material_override = SubResource("PhysicsMaterial_rj586")
-gravity_scale = 0.0
-lock_rotation = true
-linear_damp = 1.0
-script = ExtResource("1_0e48y")
 
-[node name="Sprite2D" type="Sprite2D" parent="Personagem"]
-texture_filter = 1
-texture = ExtResource("2_epypp")
-script = SubResource("GDScript_epypp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Personagem"]
-shape = SubResource("RectangleShape2D_4d7sh")
-
-[node name="Line2D" type="Line2D" parent="Personagem"]
-width = 30.0
-default_color = Color(0.823529, 0, 0.505882, 0)
-antialiased = true
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Personagem"]
-texture_filter = 1
-texture_repeat = 2
-amount = 20
-lifetime = 1.22
-trail_enabled = true
-process_material = SubResource("ParticleProcessMaterial_epypp")
-
-[node name="SpawnLine" parent="." instance=ExtResource("3_epypp")]
+[node name="SpawnLine" parent="." instance=ExtResource("4_fws66")]
+fireball_base = 1
+sun_base = 1
+ray_base = 1
+heat_base = 1

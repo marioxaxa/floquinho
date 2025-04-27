@@ -1,10 +1,10 @@
 extends Node2D
 
 # Pré-carregue só uma vez; fica mais leve.
-const FIREBALL_SCENE := preload("res://bola_de_fogo.tscn")
-const SUN_SCENE      := preload("res://sol.tscn")
-const RAY_SCENE      := preload("res://raio.tscn")
-const HEAT_SCENE     := preload("res://onda_de_calor.tscn")
+const FIREBALL_SCENE := preload("res://scenes/bola_de_fogo.tscn")
+const SUN_SCENE      := preload("res://scenes/novo_sol.tscn")
+const RAY_SCENE      := preload("res://scenes/raio.tscn")
+const HEAT_SCENE     := preload("res://scenes/onda_de_calor.tscn")
 
 @onready var path := %PathFollow2D   # nó que define a posição de tiro
 
@@ -24,6 +24,8 @@ var level_clock     := 0.0           # tempo corrido para subir nível
 @export var ray_base := 0
 @export var heat_inverted_chance := 1
 @export var heat_base := 0
+
+@onready var player := get_tree().get_first_node_in_group("player") 
 
 func _process(delta: float) -> void:
 	time_since_wave += delta
@@ -64,6 +66,14 @@ func spawn_wave() -> void:
 func _spawn_projectiles(scene: PackedScene, amount: int) -> void:
 	for i in range(amount):
 		var proj = scene.instantiate()
-		path.progress_ratio = randf()           # escolhe ponto aleatório
+		# Posiciona em ponto aleatório do PathFollow
+		path.progress_ratio = randf()
 		proj.global_position = path.global_position
+
+		# === só para Fireball: calcula direção até o jogador ===
+		if proj is Area2D:
+			var dir = (player.global_position - proj.global_position).normalized()
+			proj.velocity = dir * proj.speed          # velocidade = direção × speed
+			proj.rotation = dir.angle()               # vira a sprite (opcional)
+
 		add_child(proj)

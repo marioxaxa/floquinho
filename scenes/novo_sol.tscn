@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsiu554hl3dnq"]
+
+[ext_resource type="Script" uid="uid://l1kuqrvrr0n6" path="res://scripts/projetil.gd" id="1_naqns"]
+[ext_resource type="Texture2D" uid="uid://bhov23lv8lfhr" path="res://assets/sun.png" id="2_u1scl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y0ns"]
+size = Vector2(32, 32)
+
+[node name="Sol" type="Area2D" groups=["attacks"]]
+texture_filter = 1
+script = ExtResource("1_naqns")
+speed = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_u1scl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1y0ns")
