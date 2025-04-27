@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://v0xkl8mdy0ip"]
+[gd_scene load_steps=14 format=3 uid="uid://v0xkl8mdy0ip"]
 
 [ext_resource type="Script" uid="uid://cibcpahujuvar" path="res://personagem.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://cq3n6l621tuv6" path="res://Sprite-00002.png" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://bfkjctt1v58d7" path="res://Sprite-0003.png" id="2_epypp"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0hol4"]
@@ -25,15 +26,31 @@ size = Vector2(348, 354)
 friction = 0.0
 bounce = 1.0
 
+[sub_resource type="GDScript" id="GDScript_epypp"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4d7sh"]
 size = Vector2(24, 24)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_epypp"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 19.5
+angular_velocity_min = -264.83
+angular_velocity_max = 41.38
+radial_velocity_min = -160.92
+radial_velocity_max = 80.46
+gravity = Vector3(0, 0, 0)
+color = Color(0.09, 0.696666, 1, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.04
+anim_speed_max = 5.15
+
 [node name="Fase teste" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 500.0
-offset_bottom = 300.0
-color = Color(0.230789, 0.412132, 0.312345, 1)
+[node name="Sprite-00002" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(250, 149)
+texture = ExtResource("1_epypp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -57,35 +74,46 @@ position = Vector2(0, 300)
 shape = SubResource("SegmentShape2D_d21ai")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
-position = Vector2(224, -96)
+position = Vector2(220, -66)
 shape = SubResource("RectangleShape2D_0e48y")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
-position = Vector2(259, 396)
+position = Vector2(269, 366)
 shape = SubResource("RectangleShape2D_0e48y")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
-position = Vector2(-173, 165)
+position = Vector2(-144, 164)
 shape = SubResource("RectangleShape2D_epypp")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
-position = Vector2(676, 144)
+position = Vector2(644, 148)
 shape = SubResource("RectangleShape2D_epypp")
 
 [node name="Personagem" type="RigidBody2D" parent="."]
 position = Vector2(169, 128)
 physics_material_override = SubResource("PhysicsMaterial_rj586")
 gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 1.0
 script = ExtResource("1_0e48y")
 
 [node name="Sprite2D" type="Sprite2D" parent="Personagem"]
 texture_filter = 1
 texture = ExtResource("2_epypp")
+script = SubResource("GDScript_epypp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Personagem"]
 shape = SubResource("RectangleShape2D_4d7sh")
 
 [node name="Line2D" type="Line2D" parent="Personagem"]
 width = 30.0
-default_color = Color(0.822426, 3.36915e-06, 0.507421, 1)
+default_color = Color(0.823529, 0, 0.505882, 0)
 antialiased = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Personagem"]
+texture_filter = 1
+texture_repeat = 2
+amount = 20
+lifetime = 1.22
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_epypp")
