@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://v0xkl8mdy0ip"]
+[gd_scene load_steps=15 format=3 uid="uid://v0xkl8mdy0ip"]
 
 [ext_resource type="Script" uid="uid://cibcpahujuvar" path="res://personagem.gd" id="1_0e48y"]
 [ext_resource type="Texture2D" uid="uid://cq3n6l621tuv6" path="res://Sprite-00002.png" id="1_epypp"]
 [ext_resource type="Texture2D" uid="uid://bfkjctt1v58d7" path="res://Sprite-0003.png" id="2_epypp"]
+[ext_resource type="PackedScene" uid="uid://qs4vtrm4ytsx" path="res://spawn_line.tscn" id="3_epypp"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0hol4"]
 b = Vector2(0, 300)
@@ -117,3 +118,5 @@ amount = 20
 lifetime = 1.22
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_epypp")
+
+[node name="SpawnLine" parent="." instance=ExtResource("3_epypp")]

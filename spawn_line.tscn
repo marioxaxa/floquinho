@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://qs4vtrm4ytsx"]
+
+[ext_resource type="Script" uid="uid://cihimd80x36dl" path="res://spawn_attacks.gd" id="1_7gwkf"]
+
+[sub_resource type="Curve2D" id="Curve2D_t6iuc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -34, -45.0053, 0, 0, 0, 0, 531.916, -45.0053, 0, 0, 0, 0, 536.845, 328.989, 0, 0, 0, 0, -33.521, 326.869, 0, 0, 0, 0, -33.521, -45.12)
+}
+point_count = 5
+
+[node name="SpawnLine" type="Path2D"]
+scale = Vector2(1.01429, 0.99734)
+curve = SubResource("Curve2D_t6iuc")
+script = ExtResource("1_7gwkf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-34, -45.0053)
