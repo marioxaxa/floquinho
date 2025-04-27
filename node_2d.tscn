@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://v0xkl8mdy0ip"]
+
+[ext_resource type="Script" uid="uid://cibcpahujuvar" path="res://personagem.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://bfkjctt1v58d7" path="res://Sprite-0003.png" id="2_epypp"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0hol4"]
+b = Vector2(0, 300)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q6r6c"]
+b = Vector2(0, 300)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kdubu"]
+b = Vector2(500, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_d21ai"]
+b = Vector2(500, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(664, 191.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(348, 354)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rj586"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4d7sh"]
+size = Vector2(24, 24)
+
+[node name="Fase teste" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 500.0
+offset_bottom = 300.0
+color = Color(0.230789, 0.412132, 0.312345, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Paredes" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Paredes"]
+
+[node name="Parede Esquerda" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+shape = SubResource("SegmentShape2D_0hol4")
+
+[node name="Parede direita" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(500, 0)
+shape = SubResource("SegmentShape2D_q6r6c")
+
+[node name="Parede cima" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+shape = SubResource("SegmentShape2D_kdubu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(0, 300)
+shape = SubResource("SegmentShape2D_d21ai")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(224, -96)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(259, 396)
+shape = SubResource("RectangleShape2D_0e48y")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(-173, 165)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Paredes/StaticBody2D"]
+position = Vector2(676, 144)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="Personagem" type="RigidBody2D" parent="."]
+position = Vector2(169, 128)
+physics_material_override = SubResource("PhysicsMaterial_rj586")
+gravity_scale = 0.0
+script = ExtResource("1_0e48y")
+
+[node name="Sprite2D" type="Sprite2D" parent="Personagem"]
+texture_filter = 1
+texture = ExtResource("2_epypp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Personagem"]
+shape = SubResource("RectangleShape2D_4d7sh")
+
+[node name="Line2D" type="Line2D" parent="Personagem"]
+width = 30.0
+default_color = Color(0.822426, 3.36915e-06, 0.507421, 1)
+antialiased = true
