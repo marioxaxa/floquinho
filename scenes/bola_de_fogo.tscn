@@ -8,7 +8,9 @@ size = Vector2(16, 16)
 
 [node name="BolaDeFogo" type="Area2D" groups=["attacks"]]
 texture_filter = 1
+collision_layer = 2
 script = ExtResource("1_lh7o1")
+speed = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

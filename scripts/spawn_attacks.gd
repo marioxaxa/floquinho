@@ -25,6 +25,12 @@ var level_clock     := 0.0           # tempo corrido para subir nível
 @export var heat_inverted_chance := 1
 @export var heat_base := 0
 
+@export var fireball_cone := Vector2(-20, 20)   # (left, right)
+@export var sun_cone      := Vector2(-10, 10)
+@export var ray_cone      := Vector2(  0,  0)   # straight only
+@export var heat_cone     := Vector2(-45, 45)
+
+
 @onready var player := get_tree().get_first_node_in_group("player") 
 
 func _process(delta: float) -> void:
@@ -52,10 +58,10 @@ func increase_difficulty() -> void:
 
 func spawn_wave() -> void:
 	# Exemplo simples — incremente ou personalize do jeito que quiser
-	var fireballs   := int(difficulty / fireball_inverted_chance) + fireball_base
-	var suns        := int(difficulty / sun_inverted_chance) + sun_base
-	var rays        := int(difficulty / ray_inverted_chance) + ray_base
-	var heat_waves  := int(difficulty / heat_inverted_chance) + heat_base
+	var fireballs   := int(difficulty / (fireball_inverted_chance | 10000000)) + fireball_base
+	var suns        := int(difficulty / (sun_inverted_chance | 10000000)) + sun_base
+	var rays        := int(difficulty / (ray_inverted_chance | 10000000)) + ray_base
+	var heat_waves  := int(difficulty / (heat_inverted_chance | 10000000)) + heat_base
 
 	_spawn_projectiles(FIREBALL_SCENE, fireballs)
 	_spawn_projectiles(SUN_SCENE,      suns)
@@ -64,6 +70,14 @@ func spawn_wave() -> void:
 
 
 func _spawn_projectiles(scene: PackedScene, amount: int) -> void:
+	var cone: Vector2
+	match scene:
+		FIREBALL_SCENE: cone = fireball_cone   # ex.: Vector2(-20, 20)
+		SUN_SCENE:      cone = sun_cone
+		RAY_SCENE:      cone = ray_cone
+		HEAT_SCENE:     cone = heat_cone
+		_:              cone = Vector2.ZERO    # fallback: sem desvio
+	
 	for i in range(amount):
 		var proj = scene.instantiate()
 		# Posiciona em ponto aleatório do PathFollow
@@ -72,7 +86,9 @@ func _spawn_projectiles(scene: PackedScene, amount: int) -> void:
 
 		# === só para Fireball: calcula direção até o jogador ===
 		if proj is Area2D:
-			var dir = (player.global_position - proj.global_position).normalized()
+			var base_dir = (player.global_position - proj.global_position).normalized()
+			var offset   := deg_to_rad(randf_range(cone.x, cone.y))
+			var dir      = base_dir.rotated(offset)
 			proj.velocity = dir * proj.speed          # velocidade = direção × speed
 			proj.rotation = dir.angle()               # vira a sprite (opcional)
 

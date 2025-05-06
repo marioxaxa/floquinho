@@ -8,8 +8,9 @@ size = Vector2(32, 32)
 
 [node name="Sol" type="Area2D" groups=["attacks"]]
 texture_filter = 1
+collision_layer = 2
 script = ExtResource("1_naqns")
-speed = 100.0
+speed = 70.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

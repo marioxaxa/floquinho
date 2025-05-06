@@ -31,6 +31,7 @@ texture = ExtResource("1_rnjyy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+zoom = Vector2(2, 2)
 
 [node name="Paredes" type="Node2D" parent="."]
 
@@ -72,7 +73,9 @@ lock_rotation = false
 angular_velocity = 1.74533
 
 [node name="SpawnLine" parent="." instance=ExtResource("4_fws66")]
+fireball_inverted_chance = 3
 fireball_base = 1
-sun_base = 1
-ray_base = 1
-heat_base = 1
+sun_inverted_chance = 4
+ray_inverted_chance = 7
+heat_inverted_chance = 0
+ray_cone = Vector2(-30, 30)

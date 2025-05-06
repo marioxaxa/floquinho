@@ -1,10 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1pbp0pmv3bc3"]
+[gd_scene load_steps=4 format=3 uid="uid://d26qx0abujspx"]
 
-[ext_resource type="Texture2D" uid="uid://b68vc2cyefk2p" path="res://assets/icon.svg" id="1_ts8a5"]
+[ext_resource type="Script" uid="uid://l1kuqrvrr0n6" path="res://scripts/projetil.gd" id="1_go8p2"]
+[ext_resource type="Texture2D" uid="uid://c2l0fwuhasabc" path="res://assets/Sprite-0001.png" id="2_p5w07"]
 
-[node name="BolaDeFogo" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y0ns"]
+size = Vector2(16, 16)
+
+[node name="BolaDeFogo" type="Area2D" groups=["attacks"]]
+texture_filter = 1
+script = ExtResource("1_go8p2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
+rotation = 1.5708
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_ts8a5")
+texture = ExtResource("2_p5w07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1y0ns")
